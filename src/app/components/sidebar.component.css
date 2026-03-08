@@ -1,0 +1,180 @@
+/* Enhanced Sidebar with Modern Design */
+.sidebar-container {
+  width: 240px;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(10, 14, 39, 0.95), rgba(26, 26, 74, 0.95));
+  backdrop-filter: blur(20px);
+  border-right: 2px solid rgba(0, 217, 255, 0.3);
+  padding: 20px 0;
+  overflow-y: auto;
+  box-shadow: 2px 0 32px rgba(0, 217, 255, 0.1), inset -1px 0 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+  z-index: 30;
+}
+
+.sidebar-title {
+  color: #A855F7;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  padding: 16px 20px 12px;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(168, 85, 247, 0.3);
+  margin: 0;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+}
+
+.sidebar-menu-item {
+  padding: 0 12px;
+  margin: 8px 0;
+  transition: all 0.3s ease;
+}
+
+.sidebar-menu-item-btn {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px solid rgba(0, 217, 255, 0.15);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-menu-item-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, #00D9FF, #A855F7);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+  transform-origin: top;
+}
+
+.sidebar-menu-item-btn:hover {
+  background: rgba(0, 217, 255, 0.1);
+  border-color: #00D9FF;
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.3), inset 0 0 8px rgba(0, 217, 255, 0.05);
+  transform: translateX(8px);
+  color: #00D9FF;
+}
+
+.sidebar-menu-item-btn:hover::before {
+  transform: scaleY(1);
+}
+
+.sidebar-menu-item-btn.active {
+  background: linear-gradient(90deg, rgba(0, 217, 255, 0.2), rgba(168, 85, 247, 0.1));
+  border-color: #00D9FF;
+  color: #00D9FF;
+  box-shadow: 0 0 25px rgba(0, 217, 255, 0.4), inset 0 0 12px rgba(0, 217, 255, 0.1);
+  font-weight: 600;
+}
+
+.sidebar-menu-item-btn.active::before {
+  transform: scaleY(1);
+}
+
+.sidebar-menu-item-icon {
+  font-size: 18px;
+  min-width: 20px;
+  text-align: center;
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+.sidebar-menu-item-text {
+  flex: 1;
+  text-shadow: 0 0 4px rgba(0, 217, 255, 0.2);
+}
+
+.sidebar-tooltip {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 12px;
+  background: rgba(10, 14, 39, 0.98);
+  color: #00D9FF;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 217, 255, 0.4);
+  box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+  z-index: 100;
+  text-shadow: 0 0 6px rgba(0, 217, 255, 0.5);
+}
+
+.sidebar-tooltip::before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: #00D9FF;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #00D9FF;
+}
+
+.sidebar-menu-item:hover .sidebar-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(4px);
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.2), transparent);
+  margin: 16px 20px;
+}
+
+.sidebar-footer {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  text-align: center;
+  font-size: 11px;
+  color: rgba(168, 85, 247, 0.5);
+  text-shadow: 0 0 4px rgba(168, 85, 247, 0.2);
+}
+
+/* Scrollbar styling */
+.sidebar-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00D9FF, #A855F7);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.sidebar-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00D9FF, #EC4899);
+  box-shadow: 0 0 10px rgba(0, 217, 255, 0.4);
+}

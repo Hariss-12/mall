@@ -1,0 +1,32 @@
+<aside class="sidebar-container">
+  <!-- Menu Items -->
+  <nav class="sidebar-menu">
+    <button
+      *ngFor="let item of menuItems"
+      (click)="selectMenu(item.id)"
+      [class.active]="activeMenu() === item.id"
+      class="sidebar-menu-item"
+      [title]="item.description">
+      {{ item.icon }}
+
+      <!-- Hover Tooltip -->
+      <div class="sidebar-tooltip">
+        <p class="sidebar-tooltip-title">{{ item.label }}</p>
+        <p class="sidebar-tooltip-desc">{{ item.description }}</p>
+      </div>
+
+      <!-- Active indicator -->
+      <div
+        *ngIf="activeMenu() === item.id"
+        class="sidebar-active-indicator">
+      </div>
+    </button>
+  </nav>
+
+  <!-- Bottom settings -->
+  <div class="sidebar-bottom">
+    <button class="sidebar-menu-item">
+      ℹ️
+    </button>
+  </div>
+</aside>

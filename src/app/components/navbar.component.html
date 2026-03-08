@@ -1,0 +1,70 @@
+<header class="navbar-header">
+  <div class="navbar-content">
+    <!-- Logo -->
+    <div class="navbar-logo-group">
+      <div class="navbar-logo-icon">🏬</div>
+      <div class="navbar-logo-text">MALL</div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="navbar-search-container">
+      <div class="navbar-search-wrapper">
+        <input
+          type="text"
+          [value]="searchQuery()"
+          (input)="onSearchInput($event)"
+          (keyup.enter)="onSearch()"
+          placeholder="Search Shop / Restaurant / Theatre"
+          class="navbar-search-input"
+        />
+        <button 
+          (click)="onSearch()"
+          class="navbar-search-btn">
+          🔍
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Navigation Icons -->
+  <div class="navbar-icons">
+    <!-- Map Icon -->
+    <button 
+      (click)="openMap()"
+      class="navbar-icon-btn" 
+      title="Open Map">
+      🗺️
+    </button>
+
+    <!-- Directions Icon -->
+    <button 
+      (click)="getDirections()"
+      class="navbar-icon-btn" 
+      title="Get Directions">
+      🧭
+    </button>
+
+    <!-- Notifications -->
+    <button 
+      (click)="toggleNotifications()"
+      class="navbar-icon-btn navbar-notification-btn"
+      [class.active]="showNotifications()"
+      title="Notifications">
+      🔔
+      <span
+        *ngIf="notificationCount() > 0"
+        class="notification-badge">
+        {{ notificationCount() }}
+      </span>
+    </button>
+
+    <!-- Profile Icon -->
+    <button 
+      (click)="toggleProfile()"
+      class="navbar-icon-btn"
+      [class.active]="showProfile()"
+      title="Profile">
+      👤
+    </button>
+  </div>
+</header>

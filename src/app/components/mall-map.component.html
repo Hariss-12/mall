@@ -1,0 +1,290 @@
+<div class="mall-map-container">
+  <!-- Zoom Controls -->
+  <div class="mall-zoom-controls">
+    <button
+      (click)="zoomIn()"
+      class="mall-zoom-btn">
+      ➕
+    </button>
+    <button
+      (click)="resetZoom()"
+      class="mall-zoom-btn">
+      🎯
+    </button>
+    <button
+      (click)="zoomOut()"
+      class="mall-zoom-btn">
+      ➖
+    </button>
+  </div>
+
+  <!-- Map Canvas -->
+  <div class="map-canvas">
+    <svg
+      viewBox="0 0 900 600"
+      preserveAspectRatio="xMidYMid meet"
+      class="mall-map-svg"
+      [style.transform]="'scale(' + mapState().zoomLevel + ') translate(' + mapState().panX + 'px, ' + mapState().panY + 'px)'"
+      [style.transform-origin]="'center'">
+
+      <defs>
+      <!-- Gradient definitions -->
+      <linearGradient id="atrium-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:0.2" />
+        <stop offset="100%" style="stop-color:#A855F7;stop-opacity:0.1" />
+      </linearGradient>
+
+      <linearGradient id="corridor-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#2D0F4E;stop-opacity:0.5" />
+        <stop offset="100%" style="stop-color:#1A1A3E;stop-opacity:0.5" />
+      </linearGradient>
+    </defs>
+
+    <!-- Main Entrance -->
+    <rect x="380" y="520" width="140" height="50" fill="url(#corridor-gradient)" stroke="#00D9FF" stroke-width="2" rx="8" />
+    <text x="450" y="555" text-anchor="middle" fill="#00D9FF" font-size="18" font-weight="bold">ENTRANCE</text>
+
+    <!-- Central Atrium Circle -->
+    <circle cx="450" cy="300" r="120" fill="url(#atrium-gradient)" stroke="#00D9FF" stroke-width="3" />
+    <text x="450" y="305" text-anchor="middle" fill="#00D9FF" font-size="16" font-weight="bold">ATRIUM</text>
+
+    <!-- Corridors -->
+    <!-- Left Corridor -->
+    <path
+      d="M 330 150 L 330 500"
+      stroke="#1E90FF"
+      stroke-width="60"
+      fill="none"
+      opacity="0.3" />
+
+    <!-- Right Corridor -->
+    <path
+      d="M 570 150 L 570 500"
+      stroke="#1E90FF"
+      stroke-width="60"
+      fill="none"
+      opacity="0.3" />
+
+    <!-- Theatre Section -->
+    <g id="theatre">
+      <rect x="350" y="20" width="200" height="80" fill="rgba(168, 85, 247, 0.15)" stroke="#A855F7" stroke-width="2" rx="10" />
+      <path d="M 360 50 Q 450 30, 540 50" stroke="#A855F7" stroke-width="2" fill="none" />
+      <path d="M 360 60 Q 450 50, 540 60" stroke="#A855F7" stroke-width="1.5" fill="none" opacity="0.7" />
+      <path d="M 360 70 Q 450 60, 540 70" stroke="#A855F7" stroke-width="1.5" fill="none" opacity="0.7" />
+      <text x="450" y="95" text-anchor="middle" fill="#A855F7" font-size="14" font-weight="bold">CINEMA</text>
+    </g>
+
+    <!-- Left Corridor Shops -->
+    <g id="left-shops">
+      <!-- Shop 1 -->
+      <rect
+        x="100" y="180" width="60" height="60"
+        fill="rgba(0, 217, 255, 0.1)"
+        stroke="#00D9FF"
+        stroke-width="2"
+        rx="6"
+        (mouseenter)="hoverShop(shops()[0])"
+        (mouseleave)="hoverShop(null)"
+        (click)="selectShop(shops()[0])"
+        class="shop-block" />
+      <text x="130" y="213" text-anchor="middle" fill="#00D9FF" font-size="28">👟</text>
+
+      <!-- Shop 2 -->
+      <rect
+        x="100" y="260" width="60" height="60"
+        fill="rgba(236, 72, 153, 0.1)"
+        stroke="#EC4899"
+        stroke-width="2"
+        rx="6"
+        (mouseenter)="hoverShop(shops()[1])"
+        (mouseleave)="hoverShop(null)"
+        (click)="selectShop(shops()[1])"
+        class="shop-block" />
+      <text x="130" y="293" text-anchor="middle" fill="#EC4899" font-size="28">👗</text>
+
+      <!-- Shop 3 -->
+      <rect
+        x="100" y="340" width="60" height="60"
+        fill="rgba(168, 85, 247, 0.1)"
+        stroke="#A855F7"
+        stroke-width="2"
+        rx="6"
+        (mouseenter)="hoverShop(shops()[2])"
+        (mouseleave)="hoverShop(null)"
+        (click)="selectShop(shops()[2])"
+        class="shop-block" />
+      <text x="130" y="373" text-anchor="middle" fill="#A855F7" font-size="28">📱</text>
+
+      <!-- Shop 4 -->
+      <rect
+        x="100" y="420" width="60" height="60"
+        fill="rgba(0, 217, 255, 0.1)"
+        stroke="#00D9FF"
+        stroke-width="2"
+        rx="6"
+        (mouseenter)="hoverShop(shops()[3])"
+        (mouseleave)="hoverShop(null)"
+        (click)="selectShop(shops()[3])"
+        class="shop-block" />
+      <text x="130" y="453" text-anchor="middle" fill="#00D9FF" font-size="28">☕</text>
+    </g>
+
+    <!-- Right Corridor Shops -->
+    <g id="right-shops">
+      <!-- Shop 5 -->
+      <rect
+        x="740" y="180" width="60" height="60"
+        fill="rgba(236, 72, 153, 0.1)"
+        stroke="#EC4899"
+        stroke-width="2"
+        rx="6"
+        (mouseenter)="hoverShop(shops()[4])"
+        (mouseleave)="hoverShop(null)"
+        (click)="selectShop(shops()[4])"
+        class="shop-block" />
+      <text x="770" y="213" text-anchor="middle" fill="#EC4899" font-size="28">💄</text>
+
+      <!-- Shop 6 -->
+      <rect
+        x="740" y="260" width="60" height="60"
+        fill="rgba(168, 85, 247, 0.1)"
+        stroke="#A855F7"
+        stroke-width="2"
+        rx="6"
+        (mouseenter)="hoverShop(shops()[5])"
+        (mouseleave)="hoverShop(null)"
+        (click)="selectShop(shops()[5])"
+        class="shop-block" />
+      <text x="770" y="293" text-anchor="middle" fill="#A855F7" font-size="28">📚</text>
+
+      <!-- Shop 7 -->
+      <rect
+        x="740" y="340" width="60" height="60"
+        fill="rgba(0, 217, 255, 0.1)"
+        stroke="#00D9FF"
+        stroke-width="2"
+        rx="6"
+        (mouseenter)="hoverShop(shops()[6])"
+        (mouseleave)="hoverShop(null)"
+        (click)="selectShop(shops()[6])"
+        class="shop-block" />
+      <text x="770" y="373" text-anchor="middle" fill="#00D9FF" font-size="28">🍕</text>
+
+      <!-- Shop 8 -->
+      <rect
+        x="740" y="420" width="60" height="60"
+        fill="rgba(236, 72, 153, 0.1)"
+        stroke="#EC4899"
+        stroke-width="2"
+        rx="6"
+        (mouseenter)="hoverShop(shops()[7])"
+        (mouseleave)="hoverShop(null)"
+        (click)="selectShop(shops()[7])"
+        class="shop-block" />
+      <text x="770" y="453" text-anchor="middle" fill="#EC4899" font-size="28">💎</text>
+    </g>
+
+    <!-- Food Court Section -->
+    <rect
+      x="380" y="340" width="140" height="80"
+      fill="rgba(0, 217, 255, 0.1)"
+      stroke="#00D9FF"
+      stroke-width="2"
+      rx="8"
+      (mouseenter)="hoverShop(shops()[9])"
+      (mouseleave)="hoverShop(null)"
+      (click)="selectShop(shops()[9])"
+      class="shop-block" />
+    <text x="450" y="375" text-anchor="middle" fill="#00D9FF" font-size="12" font-weight="bold">FOOD COURT</text>
+    <text x="450" y="395" text-anchor="middle" fill="#00D9FF" font-size="24">🍔</text>
+
+    <!-- You Are Here Indicator -->
+    <g id="user-position" class="user-pos-glow">
+      <circle cx="450" cy="520" r="8" fill="#00D9FF" />
+      <circle cx="450" cy="520" r="5" fill="#0F0F23" />
+      <circle cx="450" cy="520" r="15" fill="none" stroke="#00D9FF" stroke-width="1" opacity="0.5" />
+    </g>
+
+    <!-- Direction Path (drawn when shop is selected) -->
+    <g *ngIf="selectedShop && showDirections" id="direction-path">
+      <path
+        [attr.d]="'M ' + userPosition().x + ' ' + userPosition().y + ' Q 450 ' + (userPosition().y - (userPosition().y - selectedShop.y) / 2) + ' ' + selectedShop.x + ' ' + selectedShop.y"
+        stroke="#00D9FF"
+        stroke-width="3"
+        fill="none"
+        stroke-linecap="round"
+        class="path-animate" />
+
+      <!-- Arrow indicators along path -->
+      <circle
+        cx="450"
+        cy="350"
+        r="4"
+        fill="#00D9FF"
+        opacity="0.7" />
+      <circle
+        [attr.cx]="selectedShop.x"
+        [attr.cy]="selectedShop.y"
+        r="6"
+        fill="none"
+        stroke="#00D9FF"
+        stroke-width="2" />
+    </g>
+  </svg>
+  </div>
+
+  <!-- Shop Details Panel -->
+  <div
+    *ngIf="selectedShop"
+    class="mall-details-panel">
+    <button
+      (click)="closeDetails()"
+      class="mall-close-btn">
+      ✕
+    </button>
+
+    <div class="mall-details-content">
+      <p class="mall-details-icon">{{ selectedShop.icon }}</p>
+      <h3 class="mall-details-title">{{ selectedShop.name }}</h3>
+      <p class="mall-details-category">{{ selectedShop.category }}</p>
+      <p class="mall-details-desc">{{ selectedShop.description }}</p>
+    </div>
+
+    <div class="mall-details-info">
+      <p>
+        <span class="mall-info-label">🏢 Floor:</span>
+        <span class="mall-info-value">{{ selectedShop.floor }}</span>
+      </p>
+      <p>
+        <span class="mall-info-label">📍 Location:</span>
+        <span class="mall-info-value">({{ selectedShop.x }}, {{ selectedShop.y }})</span>
+      </p>
+    </div>
+
+    <!-- Directions Steps -->
+    <div *ngIf="showDirections" class="mall-directions">
+      <p class="mall-directions-title">📋 Directions:</p>
+      <ul class="mall-directions-list">
+        <li>1. From entrance, head towards the atrium</li>
+        <li>2. Navigate to {{ selectedShop.x < 400 ? 'left' : 'right' }} corridor</li>
+        <li>3. Look for the store sign</li>
+        <li>4. Arrive at destination</li>
+      </ul>
+    </div>
+
+    <button 
+      (click)="navigateToShop()"
+      class="mall-directions-btn">
+      📍 Get Directions
+    </button>
+  </div>
+
+  <!-- Legend -->
+  <div class="mall-legend">
+    <p class="mall-legend-title">Legend</p>
+    <p class="mall-legend-item">🟦 Shops</p>
+    <p class="mall-legend-item">⭕ Atrium</p>
+    <p class="mall-legend-item">🎯 Your Location</p>
+    <p class="mall-legend-item">🔵 Direction Path</p>
+  </div>
+</div>
