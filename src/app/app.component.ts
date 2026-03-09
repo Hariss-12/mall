@@ -7,8 +7,8 @@ import { DashboardLayoutComponent } from './components/dashboard-layout.componen
   standalone: true,
   imports: [CommonModule, DashboardLayoutComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'mall';
+  title: string = 'myapp';
 }

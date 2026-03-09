@@ -1,32 +1,44 @@
 <aside class="sidebar-container">
-  <!-- Menu Items -->
-  <nav class="sidebar-menu">
-    <button
-      *ngFor="let item of menuItems"
-      (click)="selectMenu(item.id)"
-      [class.active]="activeMenu() === item.id"
-      class="sidebar-menu-item"
-      [title]="item.description">
-      {{ item.icon }}
+  <div class="sidebar-scroll-wrapper">
+    <!-- Menu Categories -->
+    <nav class="sidebar-menu">
+      <div *ngFor="let category of menuCategories" class="menu-category">
+        <!-- Category Header -->
+        <button
+          (click)="toggleCategory(category.name)"
+          class="category-header"
+          [class.expanded]="isCategoryExpanded(category.name)">
+          <span class="category-name">{{ category.name }}</span>
+          <span class="category-toggle">{{ isCategoryExpanded(category.name) ? '▼' : '▶' }}</span>
+        </button>
 
-      <!-- Hover Tooltip -->
-      <div class="sidebar-tooltip">
-        <p class="sidebar-tooltip-title">{{ item.label }}</p>
-        <p class="sidebar-tooltip-desc">{{ item.description }}</p>
+        <!-- Category Items -->
+        <div
+          class="category-items"
+          [class.collapsed]="!isCategoryExpanded(category.name)">
+          <button
+            *ngFor="let item of category.items"
+            (click)="selectMenu(item.id)"
+            [class.active]="activeMenu() === item.id"
+            class="sidebar-menu-item"
+            [title]="item.description">
+            <span class="menu-icon">{{ item.icon }}</span>
+            <span class="menu-label">{{ item.label }}</span>
+
+            <!-- Hover Tooltip -->
+            <div class="sidebar-tooltip">
+              <p class="sidebar-tooltip-title">{{ item.label }}</p>
+              <p class="sidebar-tooltip-desc">{{ item.description }}</p>
+            </div>
+
+            <!-- Active indicator -->
+            <div
+              *ngIf="activeMenu() === item.id"
+              class="sidebar-active-indicator">
+            </div>
+          </button>
+        </div>
       </div>
-
-      <!-- Active indicator -->
-      <div
-        *ngIf="activeMenu() === item.id"
-        class="sidebar-active-indicator">
-      </div>
-    </button>
-  </nav>
-
-  <!-- Bottom settings -->
-  <div class="sidebar-bottom">
-    <button class="sidebar-menu-item">
-      ℹ️
-    </button>
+    </nav>
   </div>
 </aside>

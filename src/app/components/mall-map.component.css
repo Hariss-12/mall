@@ -7,7 +7,27 @@
   padding: 24px;
   gap: 16px;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 217, 255, 0.4) transparent;
+}
+
+.mall-map-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.mall-map-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mall-map-container::-webkit-scrollbar-thumb {
+  background: rgba(0, 217, 255, 0.4);
+  border-radius: 5px;
+}
+
+.mall-map-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 217, 255, 0.6);
 }
 
 .mall-zoom-controls {
@@ -50,12 +70,33 @@
   background: radial-gradient(ellipse at center, rgba(20, 20, 50, 0.8), rgba(10, 14, 39, 0.95));
   border: 2px solid rgba(0, 217, 255, 0.2);
   border-radius: 12px;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: auto;
   position: relative;
   box-shadow: 0 8px 32px rgba(0, 217, 255, 0.1), inset 0 0 20px rgba(0, 217, 255, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 217, 255, 0.4) transparent;
+}
+
+.map-canvas::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.map-canvas::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.map-canvas::-webkit-scrollbar-thumb {
+  background: rgba(0, 217, 255, 0.4);
+  border-radius: 4px;
+}
+
+.map-canvas::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 217, 255, 0.6);
 }
 
 .mall-map-svg {
